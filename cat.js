@@ -1,11 +1,10 @@
 const fs = require('fs')
-module.exports = function (cmdFile) {
+module.exports = function (cmdFile,done) {
   fs.readFile(cmdFile, 'utf8', (err, data) => {
     if (err) {
-      throw err
+      done("Something went wrong!")
     } else {
-      console.log(data);
-      process.stdout.write("\nprompt > ");
+      done(data);
     }
   });
 }

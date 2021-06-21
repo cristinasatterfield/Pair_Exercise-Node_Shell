@@ -4,17 +4,23 @@ process.stdin.on('data', (data) => {
 
   if (cmd === "pwd") {
     const pwdOutput = require('./pwd');
-    pwdOutput();
+    pwdOutput(done);
   } else if (cmd === "ls") {
     const lsOutput = require('./ls');
-    lsOutput();
+    lsOutput(done);
   } else if (cmd.split(" ")[0] === 'cat') {
     const catArray = cmd.split(' ');
     const catOutput = require('./cat');
-    catOutput(catArray[1]);
+    catOutput(catArray[1], done);
   } else if (cmd.split(" ")[0] === 'curl') {
     const curlArray = cmd.split(' ');
     const curlOutput = require('./curl');
-    curlOutput(curlArray[1]);
+    curlOutput(curlArray[1], done);
   }
 });
+
+const done = (output) => {
+  console.log(output)
+  process.stdout.write("\nprompt > ")
+}
+
